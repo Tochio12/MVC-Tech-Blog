@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Yugioh",
+        "comment_text": "Card trading game ",
+        "post_id": 1,
+        "user_id": 1
+      },
+      {
+        "title": "Knock knock ",
+        "comment_text": "Whos there?",
+        "post_id": 2,
+        "user_id": 1
+      },
+      {
+        "title": "Hey how you doin",
+        "comment_text": "Joey from friends",
+        "post_id": 1,
+        "user_id": 2
+      },
+      {
+        "title": "Random",
+        "comment_text": "Forget about it!",
+        "post_id": 2,
+        "user_id": 2
+      }
+]
