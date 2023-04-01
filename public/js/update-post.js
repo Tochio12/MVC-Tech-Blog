@@ -1,30 +1,40 @@
-const postId = document.querySelector('input[name="post-id"]').value;
+const postId = document.querySelector('#update-post-form').getAttribute('post-id')
 
-async function editFormHandler(event) {
-    event.preventDefault();
-
-    const postTitle = document.querySelector('input[name="post-title"]').value;
-    const postText = document.querySelector('input[name="post-text"]').value;
-
-    const response = await fetch(`/api/post/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            postId,
-            postTitle,
-            postText,
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
+const updatePostFormHandler = async (event) => {
+  event.preventDefault();
+  const postTitle = document.querySelector('#post-title-input').value.trim();
+  const postText = document.querySelector('#post-text-input').value.trim();
+console.log(postTitle)
+console.log(postText)
+  if (postTitle && postText) {
+    const response = await fetch(`/api/post/${postId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ postTitle, postText, postId}),
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-        document.location.replace('/dashboard');
+      document.location.replace(`/post/${postId}`);
     } else {
-        alert(response.statusText);
+      alert('Failed to log in.');
     }
-}
+  }
+};
+
+const deletePost = async function () {
+  await fetch(`/api/post/${postId}`, {
+    method: "DELETE",
+  })
+    .then(async (response) => await response.json())
+    .then(function async(data) {
+      location.href = `/dashboard/`;
+    });
+};
 
 document
-    .querySelector('.edit-post-form')
-    .addEventListener('submit', editFormHandler);
+  .querySelector('#update-post-form')
+  .addEventListener('submit', updatePostFormHandler);
+
+document
+  .querySelector('#delete-post-btn')
+  .addEventListener('click', deletePost);

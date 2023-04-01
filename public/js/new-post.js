@@ -1,27 +1,23 @@
-async function newFormHandler(event) {
+const writePostFormHandler = async (event) => {
+    const postTitle = document.querySelector('#post-title-input').value.trim();
+    const postText = document.querySelector('#post-text-input').value.trim();
     event.preventDefault();
-    
-    const postTitle = document.querySelector('input[name="post-title"]').value;
-    const postText = document.querySelector('input[name="post-text"]').value;
-
-    const response = await fetch(`/api/post`, {
+  
+    if (postTitle && postText) {
+      const response = await fetch(`/api/post/`, {
         method: 'POST',
-        body: JSON.stringify({
-            postTitle,
-            postText,
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-
-    if (response.ok) {
+        body: JSON.stringify({ postTitle, postText }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
+      if (response.ok) {
         document.location.replace('/dashboard');
-    } else {
-        alert(response.statusText);
+      } else {
+        alert('Failed to write post.');
+      }
     }
-}
+  };
 
-document
-    .querySelector('#new-post-form')
-    .addEventListener('submit', newFormHandler)
+  document
+    .querySelector('#write-post-form')
+    .addEventListener('submit', writePostFormHandler);
