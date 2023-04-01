@@ -3,7 +3,7 @@ const { User } = require('../../models');
 const { Comment } = require('../../models/');
 const withAuth = require('../../utils/auth');
 
-// CREATE new comment
+// Get all comments
 router.post('/', withAuth, async (req, res) => {
   try {
     const dbCommentData = await Comment.create({
@@ -20,7 +20,7 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-// Update comment
+
 router.put('/:id', withAuth, async (req, res) => {
   try {
     console.log(req.body)
@@ -46,7 +46,7 @@ router.put('/:id', withAuth, async (req, res) => {
   }
 });
 
-// Delete comment
+
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const dbCommentData = await Comment.destroy({ where: { id: req.params.id } });
