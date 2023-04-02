@@ -18,7 +18,7 @@ Upon opening the site, you can browse through all the available posts and commen
 
 ## Links
 
-- [Site](https://tochio-book-seach.herokuapp.com/)
+- [Site](https://pumpkin-tart-51427.herokuapp.com/)
 
 ## Screenshots
 
