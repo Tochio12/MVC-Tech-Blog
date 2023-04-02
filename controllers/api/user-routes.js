@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-const withAuth = require('../../utils/auth')
+const withAuth = require('../../utils/auth');
 
-// CREATE new user
+
 router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Login
+
 router.post('/login', async (req, res) => {
   try {
     const dbUserData = await User.findOne({ where: { email: req.body.email } });
@@ -58,7 +58,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Logout
+
 router.post('/logout', withAuth, (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
@@ -68,7 +68,7 @@ router.post('/logout', withAuth, (req, res) => {
     res.status(404).end();
   }
 });
-// update user profile
+
 router.put('/update', withAuth, async (req, res) => {
   try {
     console.log(req.body)
@@ -108,7 +108,7 @@ router.put('/update', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-// delete user profile
+
 router.delete('/', withAuth, async (req, res) => {
   try {
     await User.destroy({where: {id: req.session.user_id}});
